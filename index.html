@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="styles2.css" >
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <title> Indicador :P</title>
+        <link rel="icon" type="image/x-icon" href="images/favicon1.ico">
+    </head>
+<body>
+<nav class="sitios">
+    <ul>
+        <li><a href="./prueba.html">Home</a></li>
+        <li><a href="./crud1.html"> CRUD </a></a></li>
+        <li><a href="./act2.html"> ACT. 2 </a></li>
+        <li><a href="./act3.html"> ACT. 3 </a></li>
+    </ul>
+</nav>
+    <content>
+    <div id="wrapper" >
+      <p>&nbsp;</p>
+      <div class="input-group input-group-lg">
+        <span class="input-group-addon" id="sizing-addon1"> Validación de Rut</span>
+        <input type="text" class="form-control" placeholder="Rut a validar, ej: 11111111-1" aria-describedby="sizing-addon1" id="txt_rut">
+      </div>
+      <p>&nbsp;</p>
+      <button id="btnvalida" class="btn btn-default">Valida RUT</button>
+      <p>&nbsp;</p>
+      <p class="text-info" id="msgerror"></p>
+    </div>
+  </content>
+<script>
+var Fn = {
+	// Valida el rut con su cadena completa "XXXXXXXX-X"
+	validaRut : function (rutCompleto) {
+		if (!/^[0-9]+[-|‐]{1}[0-9kK]{1}$/.test( rutCompleto ))
+			return false;
+		var tmp 	= rutCompleto.split('-');
+		var digv	= tmp[1]; 
+		var rut 	= tmp[0];
+		if ( digv == 'K' ) digv = 'k' ;
+		return (Fn.dv(rut) == digv );
+	},
+	dv : function(T){
+		var M=0,S=1;
+		for(;T;T=Math.floor(T/10))
+			S=(S+T%10*(9-M++%6))%11;
+		return S?S-1:'k';
+	}
+}
+
+$("#btnvalida").click(function(){
+  if (Fn.validaRut( $("#txt_rut").val() )){
+    $("#msgerror").html("El rut ingresado es válido :D");
+  } else {
+    $("#msgerror").html("El Rut no es válido :'( ");
+  }
+});
+</script>
+
+
+<footer>
+   <a href="https://www.facebook.com/"> <img
+                src="https://cdn-icons-png.freepik.com/256/12234/12234051.png?semt=ais_hybrid" alt="Facebook"></a>
+            <a href="https://www.x.com/"><img
+                src="https://png.pngtree.com/element_our/sm/20180626/sm_5b32227ca3eb9.jpg" alt="Twitter"></a>
+            <a href="https://www.instagram.com/"><img src="https://cdn-icons-png.flaticon.com/512/4922/4922972.png"
+                alt="Instagram"></a>
+
+</footer>
+</body>

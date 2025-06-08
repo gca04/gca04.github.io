@@ -1,0 +1,94 @@
+body {
+    margin: 0;
+}
+
+body {
+    background-image: url("https://media.istockphoto.com/id/488253130/vector/business-seamless-pattern-vector-background.jpg?s=1024x1024&w=is&k=20&c=fdKbA5ZUlWOWdugk4K4QDosWJFmD5V_MMwy4mI0VHgw=");
+    ;
+}
+
+h1 {
+    position: relative;
+    margin: 0px auto;
+    width: auto;
+    padding-bottom: 0px;
+    font-size: 4.1rem;
+    font-weight: 300;
+    letter-spacing: -0.15rem;
+    color: royalblue;
+}
+
+#wrapper {
+    width: 90%;
+    margin: 0px auto;
+}
+
+#msgerror {
+    font-size: 1.4em;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+footer img {
+    width: 32px;
+    margin: 5px;
+    cursor: pointer;
+    text-align: center;
+    margin-left: auto 0;
+    margin-right: auto 0;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: midnightblue;
+}
+
+li {
+    float: left;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+li a {
+    display: block;
+    color: antiquewhite;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover:not(.active) {
+    background-color: indianred;
+}
+
+#UF {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: large;
+}
+
+#DolarO {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: large;
+}
+
+#DolarA {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: large;
+}
+
+#Euro {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: large;
+}
+
+#UTM {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: large;
+}
