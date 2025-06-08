@@ -14,7 +14,7 @@
 <nav class="sitios">
     <a class="navbar-brand" href="#">Capital Clarity</a>
     <ul>
-        <li><a href="./prueba.html">Home</a></li>
+        <li><a href="./index.html">Home</a></li>
         <li><a href="./crud1.html"> CRUD </a></a></li>
         <li><a href="./act2.html"> ACT. 2 </a></li>
         <li><a href="./act3.html"> ACT. 3 </a></li>
@@ -22,6 +22,7 @@
 </nav>
     <content>
     <div id="wrapper" >
+        <h2> Ingrese su rut sin puntos y con guión</h2>
       <p>&nbsp;</p>
       <div class="input-group input-group-lg">
         <span class="input-group-addon" id="sizing-addon1"> Validación de Rut</span>
@@ -53,7 +54,12 @@ var Fn = {
 }
 
 $("#btnvalida").click(function(){
-  if (Fn.validaRut( $("#txt_rut").val() )){
+  var rut = $("#txt_rut").val().trim();
+  if (rut === "") {
+    $("#msgerror").html("Por favor, ingrese un RUT.");
+    return;
+  }
+  if (Fn.validaRut(rut)){
     $("#msgerror").html("El rut ingresado es válido :D");
   } else {
     $("#msgerror").html("El Rut no es válido :'( ");

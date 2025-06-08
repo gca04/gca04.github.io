@@ -19,15 +19,38 @@ h1 {
     letter-spacing: -0.15rem;
     color: royalblue;
 }
+h2 {
+    font-size: small;
+}
 
 #wrapper {
-    width: 90%;
-    margin: 0px auto;
+    max-width: 400px;
+    margin: 50px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 #msgerror {
     font-size: 1.4em;
 }
+
+
+
+.form-control {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    outline: none;
+}
+
+.text-info {
+    font-size: 18px;
+    font-weight: bold;
+    color: #dc3545;
+}
+
 
 footer {
     position: absolute;
