@@ -1,34 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-        <link rel="stylesheet" href="styles2.css" >
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-        <style>.carousel-inner > .item > img { width:100%; height:660px; } </style>
-        <title> CRUD:P</title>
-        <link rel="icon" type="image/x-icon" href="images/favicon1.ico">
-    </head>
-    <body>
-<nav class="sitios">
-    <a class="navbar-brand" href="#">Capital Clarity</a>
-    <ul>
-        <li><a href="./index.html">Home</a></li>
-        <li><a href="./crud1.html"> CRUD </a></a></li>
-        <li><a href="./act2.html"> ACT. 2 </a></li>
-        <li><a href="./act3.html"> ACT. 3 </a></li>
-    </ul>
-</nav>
 
-  <footer>
-   <a href="https://www.facebook.com/"> <img
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles3.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title> CRUD:P</title>
+    <link rel="icon" type="image/x-icon" href="images/favicon2.ico">
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <ul class="nav navbar-nav">
+                <li><a class="navbar-brand" href="#">Capital Clarity</a></li>
+                <li class="active"><a href="./index.html">Home</a></li>
+                <li><a href="./crud1.html">CRUD</a></li>
+                <li><a href="./act2.html">Mi Indicador API</a></li>
+                <li><a href="./act3.html">ACT. 3</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="./mys.html"><span class="glyphicon glyphicon-briefcase"></span> Misión y Visión</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <h1>Planificador de Presupuesto</h1>
+
+        <div class="form-group">
+            <label for="ingreso">Ingreso Mensual:</label>
+            <input type="number" id="ingreso" placeholder="Ingrese su ingreso">
+        </div>
+
+        <div class="form-group">
+            <label for="categoria">Categoría de Gasto:</label>
+            <select id="categoria">
+                <option value="Alimentación">Alimentación</option>
+                <option value="Transporte">Transporte</option>
+                <option value="Vivienda">Vivienda</option>
+                <option value="Entretenimiento">Entretenimiento</option>
+                <option value="Otros">Otros</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="monto">Monto del Gasto:</label>
+            <input type="number" id="monto" placeholder="Ingrese el monto">
+        </div>
+
+        <button id="btnAgregar">Agregar Gasto</button>
+
+        <h2>Lista de Gastos</h2>
+        <div id="listaGastos"></div>
+
+        <h2>Resumen</h2>
+        <p id="totalGastos">Total Gastos: $0</p>
+        <p id="saldoRestante">Saldo Restante: $0</p>
+    </div>
+
+    <script>
+        let ingresoMensual = parseFloat(localStorage.getItem("ingresoMensual")) || 0;
+        let gastos = JSON.parse(localStorage.getItem("gastos")) || [];
+
+        function actualizarResumen() {
+            let totalGastos = gastos.reduce((sum, gasto) => sum + gasto.monto, 0);
+
+            if (ingresoMensual <= 0) {
+                ingresoMensual = parseFloat(prompt("Ingrese su ingreso mensual:"));
+                if (!isNaN(ingresoMensual) && ingresoMensual > 0) {
+                    localStorage.setItem("ingresoMensual", ingresoMensual);
+                } else {
+                    ingresoMensual = 0;
+                }
+            }
+
+            let saldoRestante = ingresoMensual - totalGastos;
+
+            document.getElementById("totalGastos").innerText = `Total Gastos: $${totalGastos}`;
+            document.getElementById("saldoRestante").innerText = `Saldo Restante: $${saldoRestante >= 0 ? saldoRestante : 0}`;
+        }
+        document.getElementById("btnAgregar").addEventListener("click", function () {
+            let categoria = document.getElementById("categoria").value;
+            let monto = parseFloat(document.getElementById("monto").value);
+
+            if (isNaN(monto) || monto <= 0) {
+                alert("Ingrese un monto válido.");
+                return;
+            }
+
+            let nuevoGasto = { id: Date.now(), categoria: categoria, monto: monto };
+            gastos.push(nuevoGasto);
+            localStorage.setItem("gastos", JSON.stringify(gastos));
+            actualizarResumen();
+            mostrarGastos();
+        });
+
+        function mostrarGastos() {
+            let lista = document.getElementById("listaGastos");
+            lista.innerHTML = "";
+
+            gastos.forEach((item, index) => {
+                let div = document.createElement("div");
+                div.innerHTML = `${item.categoria}: $${item.monto} 
+            <button onclick="eliminarGasto(${item.id})">Eliminar</button>`;
+                lista.appendChild(div);
+            });
+        }
+        function eliminarGasto(id) {
+            gastos = gastos.filter(item => item.id !== id);
+            localStorage.setItem("gastos", JSON.stringify(gastos));
+            actualizarResumen();
+            mostrarGastos();
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            mostrarGastos();
+            actualizarResumen();
+        });
+
+    </script>
+
+    <footer>
+        <a href="https://www.facebook.com/"> <img
                 src="https://cdn-icons-png.freepik.com/256/12234/12234051.png?semt=ais_hybrid" alt="Facebook"></a>
-            <a href="https://www.x.com/"><img
-                src="https://png.pngtree.com/element_our/sm/20180626/sm_5b32227ca3eb9.jpg" alt="Twitter"></a>
-            <a href="https://www.instagram.com/"><img src="https://cdn-icons-png.flaticon.com/512/4922/4922972.png"
+        <a href="https://www.x.com/"><img src="https://png.pngtree.com/element_our/sm/20180626/sm_5b32227ca3eb9.jpg"
+                alt="Twitter"></a>
+        <a href="https://www.instagram.com/"><img src="https://cdn-icons-png.flaticon.com/512/4922/4922972.png"
                 alt="Instagram"></a>
-</footer>
+    </footer>
 </body>
+
 </html>

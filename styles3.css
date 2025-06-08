@@ -8,9 +8,16 @@ body {
     background-image: url("https://media.istockphoto.com/id/488253130/vector/business-seamless-pattern-vector-background.jpg?s=1024x1024&w=is&k=20&c=fdKbA5ZUlWOWdugk4K4QDosWJFmD5V_MMwy4mI0VHgw=");
 
 }
-.navbar-brand {
-    color: navy;
+.navbar {
+    background-color: midnightblue !important;
     font-weight: bold;
+}
+.navbar a {
+    color: white !important;
+}
+
+.navbar-brand {
+    padding-left: 15px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 .container {

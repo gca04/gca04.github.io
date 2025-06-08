@@ -5,20 +5,27 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="styles2.css" >
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <title> Capital Clarity </title>
         <link rel="icon" type="image/x-icon" href="images/favicon1.ico">
     </head>
 <body>
-<nav class="sitios">
-    <a class="navbar-brand" href="#">Capital Clarity</a>
-    <ul>
-        <li><a href="./index.html">Home</a></li>
-        <li><a href="./crud1.html"> CRUD </a></a></li>
-        <li><a href="./act2.html"> ACT. 2 </a></li>
-        <li><a href="./act3.html"> ACT. 3 </a></li>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <ul class="nav navbar-nav">
+      <li><a class="navbar-brand" href="#">Capital Clarity</a></li>
+      <li class="active"><a href="./index.html">Home</a></li>
+      <li><a href="./crud1.html">CRUD</a></li>
+      <li><a href="./act2.html">Mi Indicador API</a></li>
+      <li><a href="./act3.html">ACT. 3</a></li>
     </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="./mys.html"><span class="glyphicon glyphicon-briefcase"></span> Misión y Visión</a></li>
+      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
+  </div>
 </nav>
     <content>
     <div id="wrapper" >
@@ -34,6 +41,11 @@
       <p class="text-info" id="msgerror"></p>
     </div>
   </content>
+
+<input type="text" id="texto" placeholder="Ingrese texto">
+<button onclick="mostrarTextoCifrado()">Encriptar</button>
+<p id="resultado"></p>
+
 <script>
 var Fn = {
 	validaRut : function (rutCompleto) {
@@ -65,6 +77,32 @@ $("#btnvalida").click(function(){
     $("#msgerror").html("El Rut no es válido :'( ");
   }
 });
+
+function mostrarTextoCifrado() {
+    let texto = document.getElementById("texto").value;
+    let cifrado = encriptarTexto(texto);
+    document.getElementById("resultado").innerText = "Texto cifrado: " + cifrado;
+}
+function encriptarTexto(texto) {
+    let clave = "miClaveSecreta";
+    let textoCifrado = CryptoJS.AES.encrypt(texto, clave).toString();
+    return textoCifrado;
+}
+
+function desencriptarTexto(textoCifrado) {
+    let clave = "miClaveSecreta";
+    let bytes = CryptoJS.AES.decrypt(textoCifrado, clave);
+    let textoOriginal = bytes.toString(CryptoJS.enc.Utf8);
+    return textoOriginal;
+}
+
+let textoUsuario = "Hola, este es un mensaje secreto";
+let textoCifrado = encriptarTexto(textoUsuario);
+console.log("Texto cifrado:", textoCifrado);
+
+let textoDesencriptado = desencriptarTexto(textoCifrado);
+console.log("Texto desencriptado:", textoDesencriptado);
+
 </script>
 
 

@@ -4,10 +4,10 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-        <link rel="stylesheet" href="styles2.css" >
+        <link rel="stylesheet" href="styles4.css" >
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-        <title> Calculadora de Edad </title>
+        <title> Capital Clarity </title>
         <link rel="icon" type="image/x-icon" href="images/favicon2.ico">
     </head>
 <body>
@@ -26,47 +26,25 @@
     </ul>
   </div>
 </nav>
+<body>
+<div class="container">
+        <h1>Visión</h1>
+        <p>Ser la plataforma de referencia en información financiera en Chile, proporcionando datos actualizados y accesibles sobre indicadores económicos como el <strong>Dólar, UF, Euro y UTM</strong>, ayudando a los usuarios a tomar decisiones informadas para su estabilidad y crecimiento financiero.</p>
 
-  </div>
-    <h1>Calcula tu edad</h1>
-    <label for="fechaNacimiento">Fecha de nacimiento:</label>
-    <input type="date" id="fechaNacimiento">
-    <button onclick="calcularEdad()">Calcular Edad</button>
-    <p id="resultado"></p>
-
-    <script>
-        function calcularEdad() {
-            let fechaNacimiento = document.getElementById("fechaNacimiento").value;
-            if (!fechaNacimiento) {
-                document.getElementById("resultado").innerText = "Por favor, ingresa tu fecha de nacimiento.";
-                return;
-            }
-
-            let fechaNac = new Date(fechaNacimiento);
-            let hoy = new Date();
-
-            let edad = hoy.getFullYear() - fechaNac.getFullYear();
-            let mes = hoy.getMonth() - fechaNac.getMonth();
-            let dia = hoy.getDate() - fechaNac.getDate();
-
-            if (mes < 0 || (mes === 0 && dia < 0)) {
-                edad--;
-            }
-
-            document.getElementById("resultado").innerText = `Tu edad es: ${edad} años.`;
-        }
-    </script>
+        <h1>Misión</h1>
+        <p>Brindar acceso a información financiera confiable y en tiempo real, a través de una interfaz intuitiva que permita a los usuarios consultar valores económicos clave. Nuestro objetivo es fomentar la educación financiera y mejorar la planificación económica de individuos y empresas.</p>
+    </div>
 </body>
-</html>
 
-
-  <footer>
+<footer>
+	<h4>Siguenos en</h4>
    <a href="https://www.facebook.com/"> <img
                 src="https://cdn-icons-png.freepik.com/256/12234/12234051.png?semt=ais_hybrid" alt="Facebook"></a>
             <a href="https://www.x.com/"><img
                 src="https://png.pngtree.com/element_our/sm/20180626/sm_5b32227ca3eb9.jpg" alt="Twitter"></a>
             <a href="https://www.instagram.com/"><img src="https://cdn-icons-png.flaticon.com/512/4922/4922972.png"
                 alt="Instagram"></a>
+
 </footer>
 </body>
 </html>

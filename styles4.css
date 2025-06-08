@@ -1,7 +1,20 @@
 body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    text-align: center;
     margin: 0;
+    padding: 0;
     background-image: url("https://media.istockphoto.com/id/488253130/vector/business-seamless-pattern-vector-background.jpg?s=1024x1024&w=is&k=20&c=fdKbA5ZUlWOWdugk4K4QDosWJFmD5V_MMwy4mI0VHgw=");
-    ;
+
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 .navbar {
     background-color: midnightblue !important;
@@ -15,74 +28,31 @@ body {
     padding-left: 15px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
-
-h1 {
-    position: relative;
-    margin: 0px auto;
-    width: auto;
-    padding-bottom: 0px;
-    font-size: 4.1rem;
-    font-weight: 300;
-    letter-spacing: -0.15rem;
-    color: royalblue;
-}
-h2 {
-    font-size: small;
-}
-
-#wrapper {
-    max-width: 400px;
+.container {
+    max-width: 600px;
     margin: 50px auto;
     background: white;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
-
-#msgerror {
-    font-size: 1.4em;
+h1 {
+    color: navy;
+    font-size: 24px;
+    margin-bottom: 10px;
 }
 
-input[type="text"] {
-    width: 80%;
-    padding: 10px;
-    border: 2px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-input[type="text"]:focus {
-    border-color: #007bff;
-    outline: none;
-}
-
-.form-control {
-    flex: 1;
-    padding: 10px;
-    border: none;
-    outline: none;
-}
-
-.text-info {
+p {
     font-size: 18px;
-    font-weight: bold;
-    color: #dc3545;
+    color: #333;
+    line-height: 1.6;
+}
+@media (max-width: 600px) {
+    .container {
+        width: 90%;
+    }
 }
 
-.container {
-    max-width: 600px;
-    margin: auto;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-footer {
-    bottom: 0;
-    left: 0;
-    width: 100%;
-}
 
 footer img {
     width: 32px;
