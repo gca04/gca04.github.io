@@ -4,42 +4,85 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-        <link rel="stylesheet" href="styles2.css" >
+        <link rel="stylesheet" href="styles3.css" >
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <style>.carousel-inner > .item > img { width:100%; height:660px; } </style>
-        <title> Fashion Girls 2.0 :P</title>
+        <title> INDICADORES :P</title>
         <link rel="icon" type="image/x-icon" href="images/favicon1.ico">
     </head>
 <body>
 <nav class="sitios">
+    <a class="navbar-brand" href="#">Capital Clarity</a>
     <ul>
         <li><a href="./prueba.html">Home</a></li>
         <li><a href="./crud1.html"> CRUD </a></a></li>
-        <li><a href="./act2.html"> ACT. 2 </a></li>
+        <li><a href="./act2.html"> Mi Indicador </a></li>
         <li><a href="./act3.html"> ACT. 3 </a></li>
     </ul>
 </nav>
-<script>
-    fetch('https://mindicador.cl/api').then(function(response) {
-        return response.json();
-    }).then(function(dailyIndicators) {
-        document.getElementById("UF").innerHTML = 'El valor actual de la UF es $' + dailyIndicators.uf.valor;
-        document.getElementById("DolarO").innerHTML = 'El valor actual del Dólar observado es $' + dailyIndicators.dolar.valor;
-        document.getElementById("DolarA").innerHTML = 'El valor actual del Dólar acuerdo es $' + dailyIndicators.dolar_intercambio.valor;
-        document.getElementById("Euro").innerHTML = 'El valor actual del Euro es $' + dailyIndicators.euro.valor;
-        document.getElementById("UTM").innerHTML = 'El valor actual de la UTM es $' + dailyIndicators.utm.valor;
-    }).catch(function(error) {
-        console.log('Requestfailed', error);
-    });
+ <div class="container">
+        <h1>Mi indicador</h1>
+        <p id="UF"></p>
+        <p id="DolarO"></p>
+        <p id="DolarA"></p>
+        <p id="Euro"></p>
+        <p id="UTM"></p>
 
-</script>
-<div id="UF"></div>
-<div id="DolarO"></div>
-<div id="DolarA"></div>
-<div id="Euro"></div>
-<div id="UTM"></div>
-</body>
+        <h2>Convertir a Pesos Chilenos</h2>
+        <label for="monto">Monto:</label>
+        <input type="number" id="monto" placeholder="Ingrese monto">
+        
+        <label for="tipo">Tipo de moneda:</label>
+        <select id="tipo">
+            <option value="UF">UF</option>
+            <option value="Euro">Euro</option>
+            <option value="UTM">UTM</option>
+        </select>
+
+        <button onclick="convertir()">Calcular</button>
+        <p id="resultado"></p>
+    </div>
+
+    <script>
+        let indicadores = {};
+
+        function fetchIndicators() {
+            fetch('https://mindicador.cl/api')
+                .then(response => response.json())
+                .then(data => {
+                    indicadores = {
+                        UF: data.uf.valor,
+                        DolarO: data.dolar.valor,
+                        DolarA: data.dolar_intercambio.valor,
+                        Euro: data.euro.valor,
+                        UTM: data.utm.valor
+                    };
+
+                    document.getElementById("UF").innerHTML = 'El valor actual de la UF es $' + indicadores.UF;
+                    document.getElementById("DolarO").innerHTML = 'El valor actual del Dólar observado es $' + indicadores.DolarO;
+                    document.getElementById("DolarA").innerHTML = 'El valor actual del Dólar acuerdo es $' + indicadores.DolarA;
+                    document.getElementById("Euro").innerHTML = 'El valor actual del Euro es $' + indicadores.Euro;
+                    document.getElementById("UTM").innerHTML = 'El valor actual de la UTM es $' + indicadores.UTM;
+                })
+                .catch(error => console.log('Error al obtener datos', error));
+        }
+
+        function convertir() {
+            let monto = parseFloat(document.getElementById("monto").value);
+            let tipo = document.getElementById("tipo").value;
+
+            if (!monto || !indicadores[tipo]) {
+                document.getElementById("resultado").innerHTML = "Ingrese un monto válido.";
+                return;
+            }
+
+            let resultado = monto * indicadores[tipo];
+            document.getElementById("resultado").innerHTML = `El monto en pesos chilenos es: $${resultado.toFixed(2)}`;
+        }
+
+        document.addEventListener("DOMContentLoaded", fetchIndicators);
+    </script>
   <footer>
    <a href="https://www.facebook.com/"> <img
                 src="https://cdn-icons-png.freepik.com/256/12234/12234051.png?semt=ais_hybrid" alt="Facebook"></a>
@@ -47,5 +90,6 @@
                 src="https://png.pngtree.com/element_our/sm/20180626/sm_5b32227ca3eb9.jpg" alt="Twitter"></a>
             <a href="https://www.instagram.com/"><img src="https://cdn-icons-png.flaticon.com/512/4922/4922972.png"
                 alt="Instagram"></a>
-    <a href="https://portal.inacap.cl/estudiantes">Inacap</a>
 </footer>
+</body>
+</html>

@@ -1,40 +1,27 @@
+
 body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    text-align: center;
     margin: 0;
+    padding: 0;
     background-image: url("https://media.istockphoto.com/id/488253130/vector/business-seamless-pattern-vector-background.jpg?s=1024x1024&w=is&k=20&c=fdKbA5ZUlWOWdugk4K4QDosWJFmD5V_MMwy4mI0VHgw=");
-    ;
+
 }
 .navbar-brand {
     color: navy;
     font-weight: bold;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
-
-h1 {
-    position: relative;
-    margin: 0px auto;
-    width: auto;
-    padding-bottom: 0px;
-    font-size: 4.1rem;
-    font-weight: 300;
-    letter-spacing: -0.15rem;
-    color: royalblue;
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-#wrapper {
-    width: 90%;
-    margin: 0px auto;
-}
-
-#msgerror {
-    font-size: 1.4em;
-}
-
-footer {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-}
 
 footer img {
     width: 32px;
@@ -68,4 +55,35 @@ li a {
 
 li a:hover:not(.active) {
     background-color: indianred;
+}
+input, select {
+    width: 80%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+p {
+    font-size: 18px;
+    color: #444;
+    margin: 10px 0;
+}
+
+#resultado {
+    font-weight: bold;
+    color: #008000;
 }
