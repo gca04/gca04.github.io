@@ -41,10 +41,17 @@
     </div>
   </content>
 
-<input type="text" id="texto" placeholder="Ingrese texto">
-<button onclick="mostrarTextoCifrado()">Encriptar</button>
-<p id="resultado"></p>
+<button onclick="abrirModal()">Abrir Encriptador</button>
 
+<div id="modal" class="modal">
+    <div class="modal-contenido">
+        <span class="cerrar" onclick="cerrarModal()">&times;</span>
+        <h1>Encriptador de Texto</h1>
+        <input type="text" id="texto" placeholder="Ingrese texto">
+        <button onclick="mostrarTextoCifrado()">Encriptar</button>
+        <p id="resultado"></p>
+    </div>
+</div>
 <script>
 var Fn = {
 	validaRut : function (rutCompleto) {
@@ -77,11 +84,24 @@ $("#btnvalida").click(function(){
   }
 });
 
+function abrirModal() {
+    document.getElementById("modal").style.display = "flex";
+}
+
+function cerrarModal() {
+    document.getElementById("modal").style.display = "none";
+}
+
 function mostrarTextoCifrado() {
     let texto = document.getElementById("texto").value;
+    if (!texto) {
+        document.getElementById("resultado").innerText = "Por favor, ingrese un texto.";
+        return;
+    }
     let cifrado = encriptarTexto(texto);
     document.getElementById("resultado").innerText = "Texto cifrado: " + cifrado;
 }
+
 function encriptarTexto(texto) {
     let clave = "miClaveSecreta";
     let textoCifrado = CryptoJS.AES.encrypt(texto, clave).toString();
@@ -94,13 +114,36 @@ function desencriptarTexto(textoCifrado) {
     let textoOriginal = bytes.toString(CryptoJS.enc.Utf8);
     return textoOriginal;
 }
+function abrirModal() {
+    document.getElementById("modal").style.display = "flex";
+}
 
-let textoUsuario = "Hola, este es un mensaje secreto";
-let textoCifrado = encriptarTexto(textoUsuario);
-console.log("Texto cifrado:", textoCifrado);
+function cerrarModal() {
+    document.getElementById("modal").style.display = "none";
+}
 
-let textoDesencriptado = desencriptarTexto(textoCifrado);
-console.log("Texto desencriptado:", textoDesencriptado);
+function mostrarTextoCifrado() {
+    let texto = document.getElementById("texto").value;
+    if (!texto) {
+        document.getElementById("resultado").innerText = "Por favor, ingrese un texto.";
+        return;
+    }
+    let cifrado = encriptarTexto(texto);
+    document.getElementById("resultado").innerText = "Texto cifrado: " + cifrado;
+}
+
+function encriptarTexto(texto) {
+    let clave = "miClaveSecreta";
+    let textoCifrado = CryptoJS.AES.encrypt(texto, clave).toString();
+    return textoCifrado;
+}
+
+function desencriptarTexto(textoCifrado) {
+    let clave = "miClaveSecreta";
+    let bytes = CryptoJS.AES.decrypt(textoCifrado, clave);
+    let textoOriginal = bytes.toString(CryptoJS.enc.Utf8);
+    return textoOriginal;
+}
 
 </script>
 
