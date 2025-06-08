@@ -7,10 +7,13 @@
         <link rel="stylesheet" href="styles2.css" >
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-        <title> Indicador :P</title>
+        <title> Capital Clarity </title>
         <link rel="icon" type="image/x-icon" href="images/favicon1.ico">
     </head>
 <body>
+	<div class="navbar-header">
+      <a class="navbar-brand" href="#">Capital Clarity</a>
+    </div>
 <nav class="sitios">
     <a class="navbar-brand" href="#">Capital Clarity</a>
     <ul>
@@ -28,14 +31,13 @@
         <input type="text" class="form-control" placeholder="Rut a validar, ej: 11111111-1" aria-describedby="sizing-addon1" id="txt_rut">
       </div>
       <p>&nbsp;</p>
-      <button id="btnvalida" class="btn btn-default">Valida RUT</button>
+      <button id="btnvalida" class="btn btn-default">Validar RUT</button>
       <p>&nbsp;</p>
       <p class="text-info" id="msgerror"></p>
     </div>
   </content>
 <script>
 var Fn = {
-	// Valida el rut con su cadena completa "XXXXXXXX-X"
 	validaRut : function (rutCompleto) {
 		if (!/^[0-9]+[-|‐]{1}[0-9kK]{1}$/.test( rutCompleto ))
 			return false;
@@ -64,6 +66,7 @@ $("#btnvalida").click(function(){
 
 
 <footer>
+	<h2>Siguenos en</h2>
    <a href="https://www.facebook.com/"> <img
                 src="https://cdn-icons-png.freepik.com/256/12234/12234051.png?semt=ais_hybrid" alt="Facebook"></a>
             <a href="https://www.x.com/"><img
