@@ -34,7 +34,6 @@ body {
     background: white;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 h1 {
     color: navy;
@@ -86,4 +85,33 @@ li a {
 
 li a:hover:not(.active) {
     background-color: indianred;
+}
+
+input[type="date"] {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+p#resultado {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+    color: #333;
 }
