@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<!--NOTA: decidí volver a realizar mi página debido a que estaba insatisfecha con la anterior-->
+<!--Eliminé el carro y lo reemplacé con un planificador de presupuesto para el crud e incluye localstorage-->
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,6 +15,7 @@
 </head>
 
 <body>
+  <!--Barra de navegación con glyphicon-->
   <nav class="navbar navbar-inverse">
     <div class="container-fluid">
       <ul class="nav navbar-nav">
@@ -26,9 +28,9 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="./mys.html"><span class="glyphicon glyphicon-briefcase"></span> Misión y Visión</a></li>
-      </ul>
     </div>
   </nav>
+  <!--carrusel con imágenes relacionadas a la página-->
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
       <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -61,6 +63,7 @@
   </div>
   <h1> Bienvenid@ a Capital Clarity </h1>
   <h2>Suscríbete para obtener tips sobre finanzas!</h2>
+  <!--Formulario con validación para suscripción falsa-->
   <form id="miFormulario" action="">
     <label for="nombre">Nombre:</label>
     <input type="text" id="nombre" required> <br><br>
@@ -87,11 +90,11 @@
       let nombre = document.getElementById('nombre').value;
       let email = document.getElementById('email').value;
       if (nombre.length < 3) {
-                errorNombre.style.display = "block";
-                valido = false;
-            } else {
-                errorNombre.style.display = "none";
-            }
+        errorNombre.style.display = "block";
+        valido = false;
+      } else {
+        errorNombre.style.display = "none";
+      }
 
       if (!esEmailValido(email)) {
         errores.push('el formato de email es incorrecto');
@@ -108,8 +111,11 @@
         event.preventDefault();
         document.getElementById('errores').innerHTML = errores.join('<br>');
       }
-
-    });
+      else {
+      alert('¡Gracias por suscribirte. Pronto recibirás tips sobre finanzas.');
+      document.getElementById('miFormulario').reset();
+    }
+  });
   </script>
   <footer>
     <h3>Siguenos en</h3>
@@ -122,4 +128,5 @@
 
   </footer>
 </body>
+
 </html>
