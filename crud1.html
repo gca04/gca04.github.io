@@ -69,59 +69,53 @@
 
         function actualizarResumen() {
             let totalGastos = gastos.reduce((sum, gasto) => sum + gasto.monto, 0);
-
             if (ingresoMensual <= 0) {
-                ingresoMensual = parseFloat(prompt("Ingrese su ingreso mensual:"));
-                if (!isNaN(ingresoMensual) && ingresoMensual > 0) {
-                    localStorage.setItem("ingresoMensual", ingresoMensual);
-                } else {
-                    ingresoMensual = 0;
+                ingresoMensual = 0;
+
+                let saldoRestante = ingresoMensual - totalGastos;
+
+                document.getElementById("totalGastos").innerText = `Total Gastos: $${totalGastos}`;
+                document.getElementById("saldoRestante").innerText = `Saldo Restante: $${saldoRestante >= 0 ? saldoRestante : 0}`;
+            }}
+
+            document.getElementById("btnAgregar").addEventListener("click", function () {
+                let categoria = document.getElementById("categoria").value;
+                let monto = parseFloat(document.getElementById("monto").value);
+
+                if (isNaN(monto) || monto <= 0) {
+                    alert("Ingrese un monto válido.");
+                    return;
                 }
-            }
 
-            let saldoRestante = ingresoMensual - totalGastos;
-
-            document.getElementById("totalGastos").innerText = `Total Gastos: $${totalGastos}`;
-            document.getElementById("saldoRestante").innerText = `Saldo Restante: $${saldoRestante >= 0 ? saldoRestante : 0}`;
-        }
-        document.getElementById("btnAgregar").addEventListener("click", function () {
-            let categoria = document.getElementById("categoria").value;
-            let monto = parseFloat(document.getElementById("monto").value);
-
-            if (isNaN(monto) || monto <= 0) {
-                alert("Ingrese un monto válido.");
-                return;
-            }
-
-            let nuevoGasto = { id: Date.now(), categoria: categoria, monto: monto };
-            gastos.push(nuevoGasto);
-            localStorage.setItem("gastos", JSON.stringify(gastos));
-            actualizarResumen();
-            mostrarGastos();
-        });
-
-        function mostrarGastos() {
-            let lista = document.getElementById("listaGastos");
-            lista.innerHTML = "";
-
-            gastos.forEach((item, index) => {
-                let div = document.createElement("div");
-                div.innerHTML = `${item.categoria}: $${item.monto} 
-            <button onclick="eliminarGasto(${item.id})">Eliminar</button>`;
-                lista.appendChild(div);
+                let nuevoGasto = { id: Date.now(), categoria: categoria, monto: monto };
+                gastos.push(nuevoGasto);
+                localStorage.setItem("gastos", JSON.stringify(gastos));
+                actualizarResumen();
+                mostrarGastos();
             });
-        }
-        function eliminarGasto(id) {
-            gastos = gastos.filter(item => item.id !== id);
-            localStorage.setItem("gastos", JSON.stringify(gastos));
-            actualizarResumen();
-            mostrarGastos();
-        }
 
-        document.addEventListener("DOMContentLoaded", function () {
-            mostrarGastos();
-            actualizarResumen();
-        });
+            function mostrarGastos() {
+                let lista = document.getElementById("listaGastos");
+                lista.innerHTML = "";
+
+                gastos.forEach((item, index) => {
+                    let div = document.createElement("div");
+                    div.innerHTML = `${item.categoria}: $${item.monto} 
+            <button onclick="eliminarGasto(${item.id})">Eliminar</button>`;
+                    lista.appendChild(div);
+                });
+            }
+            function eliminarGasto(id) {
+                gastos = gastos.filter(item => item.id !== id);
+                localStorage.setItem("gastos", JSON.stringify(gastos));
+                actualizarResumen();
+                mostrarGastos();
+            }
+
+            document.addEventListener("DOMContentLoaded", function () {
+                mostrarGastos();
+                actualizarResumen();
+            });
 
     </script>
 
