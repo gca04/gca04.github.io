@@ -35,6 +35,7 @@
         <div class="form-group">
             <label for="ingreso">Ingreso Mensual:</label>
             <input type="number" id="ingreso" placeholder="Ingrese su ingreso">
+            <button id="btnIngreso">Guardar Ingreso</button>
         </div>
 
         <div class="form-group">
@@ -61,22 +62,28 @@
         <h2>Resumen</h2>
         <p id="totalGastos">Total Gastos: $0</p>
         <p id="saldoRestante">Saldo Restante: $0</p>
-    </div>
 
-    <script>
-        let ingresoMensual = parseFloat(localStorage.getItem("ingresoMensual")) || 0;
-        let gastos = JSON.parse(localStorage.getItem("gastos")) || [];
+        <script>
+            let ingresoMensual = parseFloat(localStorage.getItem("ingresoMensual")) || 0;
+            let gastos = JSON.parse(localStorage.getItem("gastos")) || [];
 
-        function actualizarResumen() {
-            let totalGastos = gastos.reduce((sum, gasto) => sum + gasto.monto, 0);
-            if (ingresoMensual <= 0) {
-                ingresoMensual = 0;
-
+            function actualizarResumen() {
+                let totalGastos = gastos.reduce((sum, gasto) => sum + gasto.monto, 0);
                 let saldoRestante = ingresoMensual - totalGastos;
 
                 document.getElementById("totalGastos").innerText = `Total Gastos: $${totalGastos}`;
                 document.getElementById("saldoRestante").innerText = `Saldo Restante: $${saldoRestante >= 0 ? saldoRestante : 0}`;
-            }}
+            }
+
+            document.getElementById("btnIngreso").addEventListener("click", function () {
+                ingresoMensual = parseFloat(document.getElementById("ingreso").value);
+                if (isNaN(ingresoMensual) || ingresoMensual <= 0) {
+                    alert("Ingrese un ingreso válido.");
+                    return;
+                }
+                localStorage.setItem("ingresoMensual", ingresoMensual);
+                actualizarResumen();
+            });
 
             document.getElementById("btnAgregar").addEventListener("click", function () {
                 let categoria = document.getElementById("categoria").value;
@@ -98,13 +105,14 @@
                 let lista = document.getElementById("listaGastos");
                 lista.innerHTML = "";
 
-                gastos.forEach((item, index) => {
+                gastos.forEach((item) => {
                     let div = document.createElement("div");
                     div.innerHTML = `${item.categoria}: $${item.monto} 
-            <button onclick="eliminarGasto(${item.id})">Eliminar</button>`;
+                <button onclick="eliminarGasto(${item.id})">Eliminar</button>`;
                     lista.appendChild(div);
                 });
             }
+
             function eliminarGasto(id) {
                 gastos = gastos.filter(item => item.id !== id);
                 localStorage.setItem("gastos", JSON.stringify(gastos));
@@ -116,17 +124,17 @@
                 mostrarGastos();
                 actualizarResumen();
             });
+        </script>
 
-    </script>
 
-    <footer>
-        <a href="https://www.facebook.com/"> <img
-                src="https://cdn-icons-png.freepik.com/256/12234/12234051.png?semt=ais_hybrid" alt="Facebook"></a>
-        <a href="https://www.x.com/"><img src="https://png.pngtree.com/element_our/sm/20180626/sm_5b32227ca3eb9.jpg"
-                alt="Twitter"></a>
-        <a href="https://www.instagram.com/"><img src="https://cdn-icons-png.flaticon.com/512/4922/4922972.png"
-                alt="Instagram"></a>
-    </footer>
+        <footer>
+            <a href="https://www.facebook.com/"> <img
+                    src="https://cdn-icons-png.freepik.com/256/12234/12234051.png?semt=ais_hybrid" alt="Facebook"></a>
+            <a href="https://www.x.com/"><img src="https://png.pngtree.com/element_our/sm/20180626/sm_5b32227ca3eb9.jpg"
+                    alt="Twitter"></a>
+            <a href="https://www.instagram.com/"><img src="https://cdn-icons-png.flaticon.com/512/4922/4922972.png"
+                    alt="Instagram"></a>
+        </footer>
 </body>
 
 </html>
