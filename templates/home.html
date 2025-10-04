@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Clientes y Mascotas</title>
+</head>
+<body>
+    <h1>Registrar Cliente</h1>
+    <form method="post" action="">
+        {% csrf_token %}
+        <label for="rut">RUT:</label>
+        <input type="number" name="rut" id="rut" required><br>
+        <label for="nom_ap">Nombre y Apellido:</label>
+        <input type="text" name="nom_ap" id="nom_ap" required><br>
+        <label for="telefono">Teléfono:</label>
+        <input type="number" name="telefono" id="telefono" required><br>
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" required><br>
+        <button type="submit" name="crear_cliente">Crear Cliente</button>
+    </form>
+
+    <h2>Lista de Clientes</h2>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>RUT</th>
+            <th>Nombre y Apellido</th>
+            <th>Teléfono</th>
+            <th>Email</th>
+            <th>Acciones</th>
+        </tr>
+        {% for cliente in clientes %}
+        <tr>
+            <td>{{ cliente.idCliente }}</td>
+            <td>{{ cliente.Rut }}</td>
+            <td>{{ cliente.Nom_ap }}</td>
+            <td>{{ cliente.Telefono }}</td>
+            <td>{{ cliente.email }}</td>
+            <td>
+                <form method="post" action="{% url 'eliminar_cliente' cliente.idCliente %}" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" onclick="return confirm('¿Seguro que desea eliminar este cliente?');">Eliminar</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h1>Registrar Mascota</h1>
+    <form method="post" action="">
+        {% csrf_token %}
+        <label for="nombre_mascota">Nombre Mascota:</label>
+        <input type="text" name="nombre_mascota" id="nombre_mascota" required><br>
+        <label for="animal">Animal:</label>
+        <input type="text" name="animal" id="animal" required><br>
+        <label for="raza">Raza:</label>
+        <input type="text" name="raza" id="raza" required><br>
+        <label for="chip">Chip:</label>
+        <input type="number" name="chip" id="chip" required><br>
+        <label for="id_cliente">Cliente:</label>
+        <select name="id_cliente" id="id_cliente" required>
+            <option value="">Seleccione</option>
+            {% for cliente in clientes %}
+            <option value="{{ cliente.idCliente }}">{{ cliente.Nom_ap }}</option>
+            {% endfor %}
+        </select><br>
+        <button type="submit" name="crear_mascota">Crear Mascota</button>
+    </form>
+
+    <h2>Lista de Mascotas</h2>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Animal</th>
+            <th>Raza</th>
+            <th>Chip</th>
+            <th>Cliente</th>
+        </tr>
+        {% for mascota in mascotas %}
+        <tr>
+            <td>{{ mascota.idMas }}</td>
+            <td>{{ mascota.NombreMascota }}</td>
+            <td>{{ mascota.Animal }}</td>
+            <td>{{ mascota.Raza }}</td>
+            <td>{{ mascota.chip }}</td>
+            <td>{{ mascota.idCliente.Nom_ap }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
